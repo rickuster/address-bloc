@@ -55,12 +55,12 @@
      end
     end
      
-     describe "#import_from_csv" do
+     describe "#import_from_csv1" do
          
          Dir.chdir("/Users/Rickuster/bloc/address-bloc/models")
          #puts "The current directory is:" + Dir.pwd
          
-        it "imports the correct number of entries" do
+        it "imports the correct number of entries from entries.csv" do
             book.import_from_csv("entries.csv")
             book_size = book.entries.size
             
@@ -102,5 +102,40 @@
            check_entry(entry_five, "Sussie", "555-555-2036", "sussie@blocmail.com")
          end
        end
+      
+     describe "#import_from_csv2" do
+         
+         Dir.chdir("/Users/Rickuster/bloc/address-bloc/models")
+         #puts "The current directory is:" + Dir.pwd
+         
+      it "imports the correct number of entries from entries_2.csv" do
+            book.import_from_csv("entries_2.csv")
+            puts book.entries[0]
+            book_size = book.entries.size
+            expect(book_size).to eq 3
+        end
+         
+        it "imports the 1st entry" do
+            book.import_from_csv("entries_2.csv")
+            # Check the first entry
+            entry_one = book.entries[0]
+            puts entry_one
+            check_entry(entry_one, "Dole", "555-666-7777", "dole@blocmail.com")
+        end
+         
+         it "imports the 2nd entry" do
+           book.import_from_csv("entries_2.csv")
+           # Check the second entry
+           entry_two = book.entries[1]
+           check_entry(entry_two, "Summer", "111-222-3333", "summer@blocmail.com")
+         end
+ 
+         it "imports the 3rd entry" do
+           book.import_from_csv("entries_2.csv")
+           # Check the third entry
+           entry_three = book.entries[2]
+           check_entry(entry_three, "Ting", "222-333-4444", "ting@blocmail.com")
+         end
+     end
      
  end
